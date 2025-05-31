@@ -19,8 +19,9 @@ Future work include
 * **Enhance N to broader pattern**
 
  
-  [0] Queiroz, Saulo. Fast Compressed-Domain Discrete Fourier Transform: The ``Twiddless'' FFT Algorithm. draft available online in https://arxiv.org/abs/2505.23718.
-  [1]  S. Queiroz, J. P. Vilela, and E. Monteiro, “Fast computation of the discrete
+  [0] Saulo Queiroz. Fast Compressed-Domain Discrete Fourier Transform: The ``Twiddless'' FFT Algorithm.
+  Draft available online in https://arxiv.org/abs/2505.23718.
+  [1]  Saulo Queiroz, J. P. Vilela, and E. Monteiro, “Fast computation of the discrete
        fourier transform square index coefficients,” IEEE Signal Processing Magazine
        (Tips & Tricks), vol. 42, issue 2, 2025.
   [2] Saulo Queiroz, João P. Vilela, Benjamin Koon Kei Ng, Chan-Tong Lam, Edmundo Monteiro. “Fast computation of the discrete
