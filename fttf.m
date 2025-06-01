@@ -57,9 +57,13 @@ function X = tfft(x)
     % [2]  https://arxiv.org/abs/2407.00182     
     x_even_comp = x_row(1:C) + x_row(C+1:N);
 
-    % Compression for odd-indexed frequencies
-    x_mod = shift_factor(x_row, 1);
-    x_odd_comp = x_mod(1:C) + x_mod(C+1:N);
+    % Compression for odd-indexed frequencies (difference)
+    x_diff = x(1:C) - x(C+1:N);
+
+    % Apply modulation AFTER compression
+    n = 0:C-1;
+    phase = exp(-1j * 2 * pi * n / N);
+    x_odd = x_diff .* phase;
 
     X_even = tfft(x_even_comp);
     X_odd = tfft(x_odd_comp);
