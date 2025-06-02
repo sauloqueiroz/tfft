@@ -26,15 +26,11 @@
 %
 % TFFT algorithm. Assume N=c2^k for c=3 or c=5 and k>=0.
 function X = tfft(x)
-    N = length(x);
-function X = tfft(x)
-
-    N = length(x);
-  if (N == 1) | (N == 2) | (N == 3) | (N==5) 
-        X = fft(x); 
-        return;   
-  else
-
+  N = length(x);
+if N <= 5
+    X = fft(x);
+    return;
+end
     C = N / 2;
 
     % Compression for even-indexed frequencies (sum), 
@@ -48,8 +44,8 @@ function X = tfft(x)
     x_diff = x(1:C) - x(C+1:N);
 
     % Apply modulation AFTER compression
-    n = 0:C-1;
-    phase = exp(-1j * 2 * pi * n / N);
+    c = 0:C-1;
+    phase = exp(-1j * 2 * pi * c / N);
     x_odd = x_diff .* phase;
 
     % Recursive calls
@@ -60,7 +56,6 @@ function X = tfft(x)
     X = zeros(1, N);
     X(1:2:end) = X_even;   
     X(2:2:end) = X_odd;   
- end
 end
 % example
 N=20;
