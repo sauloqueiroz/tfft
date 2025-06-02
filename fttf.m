@@ -48,7 +48,11 @@ function X = tfft(x)
 
     C = N / 2;
 
-    % Compression for even-indexed frequencies (sum)
+    % Compression for even-indexed frequencies (sum), 
+    % references:
+    % [1] S. Queiroz, J. P. Vilela, and E. Monteiro, “Fast computation of the discrete Fourier 
+    % transform square index coefficients,” IEEE Signal Process. Mag. (Tips & Tricks), vol. 42, issue 2, 2025.
+    % [2]  https://arxiv.org/abs/2407.00182  
     x_even = x(1:C) + x(C+1:N);
 
     % Compression for odd-indexed frequencies (difference)
