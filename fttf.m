@@ -24,17 +24,6 @@
 % * limitations under the License.
 % */
 %
-
-% frequency shift modulation
-function x_mod = shift_factor(x, r)
-  % Frequency shift modulation
-  % x_mod = x .* exp(-j * 2 * pi * r * n / N)
-  N = length(x);
-  n = 0:N-1;
-  phase = exp(-1j * 2 * pi * r * n / N);
-  x_mod = x(:).' .* phase;
-end
-
 % TFFT algorithm. Assume N=c2^k for c=3 or c=5 and k>=0.
 function X = tfft(x)
     N = length(x);
