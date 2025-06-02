@@ -38,24 +38,18 @@ end
 % TFFT algorithm. Assume N=c2^k for c=3 or c=5 and k>=0.
 function X = tfft(x)
     N = length(x);
-    if N == 1
-        X = x(1); 
-        return;   
-    elseif N == 2
-        X = [x(1) + x(2), x(1) - x(2)];
-        return;   
-    elseif (N == 3) | (N==5) 
+function X = tfft(x)
+
+    N = length(x);
+  if (N == 1) | (N == 2) | (N == 3) | (N==5) 
         X = fft(x); 
         return;   
-    end
+  else
+
     C = N / 2;
-    x_row = x(:).'; 
-    % Compression for even-indexed frequencies, 
-    % references:
-    % [1] S. Queiroz, J. P. Vilela, and E. Monteiro, “Fast computation of the discrete Fourier 
-    % transform square index coefficients,” IEEE Signal Process. Mag. (Tips & Tricks), vol. 42, issue 2, 2025.
-    % [2]  https://arxiv.org/abs/2407.00182     
-    x_even_comp = x_row(1:C) + x_row(C+1:N);
+
+    % Compression for even-indexed frequencies (sum)
+    x_even = x(1:C) + x(C+1:N);
 
     % Compression for odd-indexed frequencies (difference)
     x_diff = x(1:C) - x(C+1:N);
@@ -65,14 +59,16 @@ function X = tfft(x)
     phase = exp(-1j * 2 * pi * n / N);
     x_odd = x_diff .* phase;
 
-    X_even = tfft(x_even_comp);
-    X_odd = tfft(x_odd_comp);
+    % Recursive calls
+    X_even = tfft(x_even);
+    X_odd = tfft(x_odd);
 
-    X = zeros(1, N); 
-    X(1:2:N) = X_even;
-    X(2:2:N) = X_odd;
+    % Combine results
+    X = zeros(1, N);
+    X(1:2:end) = X_even;   
+    X(2:2:end) = X_odd;   
+ end
 end
-
 % example
 N=20;
 x=rand(1,N)+rand(1,N)*i;
