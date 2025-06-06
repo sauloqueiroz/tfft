@@ -1,33 +1,3 @@
-Conversa aberta. Uma mensagem lida.
-
-Pular para o conteúdo
-Como usar o Gmail com leitores de tela
-in:sent 
-
-1 de 2.790
-Investigation about TFFT and DIF FFT
-
-Saulo Queiroz <sauloqueiroz@utfpr.edu.br>
-Anexos
-16:01 (há 12 minutos)
-para Gopinath, Arjuna
-
-Hello,
-
-Just to share to you my last outcomes
-
-I'm thinking that TFFT is a kind of generalization of Decimation In Frequency (DIF) FFT enabling more flexible input lengths due to the "rectangular" nature of the RIC compression algorithm.  The number of smaller signals after decimation and depth of recursive FFT depend on the chosen C and L in N=CL.
-
-For example, appended is a kind of radix-(2*7^k) TFFT for k>=7 implemented in matlab. eg N=4082.
-
-It decimates the input signal x into seven N/7-point signals whose DFT readily gives the DFT of the original signals.  The first decimation does not need frequency shift modulation. All other six do. Complexity is T(N)=7T(N/7) + 7(N-1) (additions) + 6N (mults) = O(Nlog_7 N) complex arithmetic instructions.
-
-This implementation needs 6 frequency modulators to shift the smaller signals.  The combination step needs no multiplication, it is just a matter of index repositioning. 
-I will work on the generic algorithm.
-What do you think? 
-
-1 anexo
-  •  Anexos verificados pelo Gmail
 % The Twiddless Fast Fourier transform algorithm.
 % Saulo Queiroz, Federal University of Technology, Ponta Grossa, PR, Brazil.
 %
